@@ -20,8 +20,15 @@ dependencies {
 intellij {
     version = "2020.3"
 }
+
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
     changeNotes("""
       Add change notes here.<br>
       <em>most HTML tags may be used</em>""")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }

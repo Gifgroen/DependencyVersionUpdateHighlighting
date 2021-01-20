@@ -12,10 +12,30 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <notificationGroup id="MyGroup" displayType="BALLOON" key="com.gifgroen.actions.MyAction"/>
+
+        <!-- Version state -->
+        <applicationService serviceImplementation="com.gifgroen.state.VersionState"/>
+
+        <postStartupActivity implementation="com.gifgroen.components.VersionStartupActivity" />
+
+        <!-- App settings -->
+        <applicationService serviceImplementation="com.gifgroen.state.AppSettingsState"/>
+
+        <applicationConfigurable parentId="tools"
+                                 instance="com.gifgroen.configurables.ApplicationSettingsConfigurable"
+                                 id="com.gifgroen.configurables.ApplicationSettingsConfigurable"
+                                 displayName="My Application Settings"/>
+
     </extensions>
 
     <actions>
-        <!-- Add your actions here -->
+        <group id="MyPlugin.TopMenu" text="_MyPlugin" description="MyPlugin toolbar menu">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+            <action id="com.gifgroen.actions.MyAction"
+                    class="com.gifgroen.actions.MyAction"
+                    text="A Wild MyAction"
+                    description="Execution of a wild MyAction action"/>
+        </group>
     </actions>
 </idea-plugin>
